@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(done:*)",
+      "Bash(find:*)",
+      "WebSearch",
+      "Bash(mkdir:*)",
+      "Bash(dir:*)",
+      "Skill(stock-research-executor)"
+    ]
+  }
+}
