@@ -372,6 +372,7 @@ MIT License. See `LICENSE` file for full details.
 - 所有投资均有风险，包括本金损失
 - 过往表现不代表未来结果
 - 请自行进行尽职调查并在做出投资决策前咨询合格的财务顾问
+- 提示词参考来源：https://mp.weixin.qq.com/s/EFT5S-cCeCnEIDZOD_DYbA
 
 ---
 
