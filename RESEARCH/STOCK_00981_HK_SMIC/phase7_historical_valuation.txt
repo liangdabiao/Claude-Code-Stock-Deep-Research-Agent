@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "search_intent": [
+    {
+      "query": "中芯国际 历史估值 PE PB 股价走势 2020-2025",
+      "intent": "SEARCH_ALWAYS",
+      "keywords": "中芯国际 历史估值 pe pb 股价走势 2020-2025"
+    }
+  ],
+  "search_results": [
+    {
+      "title": "中芯国际",
+      "link": "https://quote.eastmoney.com/kcb/688981.html",
+      "content": "股票名称: 中芯国际;股票代码: 688981;最新价: 106.50;涨跌幅: -0.37%;涨跌额: -0.40;今开: 107.00;昨收: 106.90;",
+      "media": "",
+      "publish_date": "",
+      "refer": "ref_1"
+    }
+  ]
+}
