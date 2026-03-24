@@ -1,2 +1,11 @@
 .ace-tool/
 .worktrees/
+node_modules/
+dist/
+coverage/
+.DS_Store
+.env
+.env.*
+!.env.example
+storage/sqlite/*.db
+storage/sqlite/*.db-*
