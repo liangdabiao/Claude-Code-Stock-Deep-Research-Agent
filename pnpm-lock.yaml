@@ -21,6 +21,12 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.12.0)(tsx@4.21.0)
 
+  apps/feishu-bot:
+    dependencies:
+      '@stock-bot/research-core':
+        specifier: workspace:*
+        version: link:../../packages/research-core
+
   packages/research-core:
     dependencies:
       zod:

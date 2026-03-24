@@ -1,0 +1,14 @@
+{
+  "name": "@stock-bot/feishu-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@stock-bot/research-core": "workspace:*"
+  }
+}
