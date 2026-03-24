@@ -50,4 +50,56 @@ describe("createMessageHandler", () => {
     expect(symbolResolver.resolve).toHaveBeenCalledWith("腾讯");
     expect(quickJudgeService).toHaveBeenCalledTimes(1);
   });
+
+  it("answers against the latest report for a report follow-up question", async () => {
+    const client = {
+      sendCard: vi.fn(async () => undefined)
+    };
+    const routeIntent = vi.fn(() => ({
+      type: "report_qa" as const,
+      question: "这份报告里最大的风险是什么？"
+    }));
+    const symbolResolver = {
+      resolve: vi.fn(() => null)
+    };
+    const quickJudgeService = vi.fn(async () => {
+      throw new Error("quick judge should not run");
+    });
+    const getLatestReportId = vi.fn(() => "report_tencent");
+    const reportQaService = {
+      answer: vi.fn(async () => ({
+        reportId: "report_tencent",
+        ticker: "00700.HK",
+        companyName: "腾讯控股",
+        summary: "腾讯属于值得继续研究的互联网龙头。",
+        answer: "报告中提到的最大风险是监管风险。"
+      }))
+    };
+    const handler = createMessageHandler({
+      client,
+      routeIntent,
+      symbolResolver,
+      quickJudgeService,
+      getLatestReportId,
+      reportQaService
+    });
+
+    await handler.handle({
+      event: {
+        message: {
+          chat_id: "oc_test_chat",
+          content: "{\"text\":\"这份报告里最大的风险是什么？\"}"
+        }
+      }
+    });
+
+    expect(reportQaService.answer).toHaveBeenCalledWith({
+      reportId: "report_tencent",
+      question: "这份报告里最大的风险是什么？"
+    });
+    expect(symbolResolver.resolve).not.toHaveBeenCalled();
+    expect(quickJudgeService).not.toHaveBeenCalled();
+    expect(client.sendCard).toHaveBeenCalledTimes(1);
+    expect(JSON.stringify(client.sendCard.mock.calls[0]?.[0]?.card)).toContain("监管风险");
+  });
 });

@@ -3,7 +3,12 @@ export type QuickJudgeIntent = {
   rawSymbolQuery: string;
 };
 
-export type Intent = QuickJudgeIntent;
+export type ReportQaIntent = {
+  type: "report_qa";
+  question: string;
+};
+
+export type Intent = QuickJudgeIntent | ReportQaIntent;
 
 const PREFIX_PATTERNS = [
   /^请帮我(?:看下|看看|分析|研究)?/u,
@@ -19,6 +24,8 @@ const SUFFIX_PATTERNS = [
   /可以吗$/u,
   /好吗$/u
 ];
+
+const REPORT_QA_PATTERNS = [/这份报告/u, /这篇报告/u, /报告里/u, /报告中/u];
 
 export function extractSymbolQuery(text: string): string {
   const original = text.trim();
@@ -36,6 +43,13 @@ export function extractSymbolQuery(text: string): string {
 }
 
 export function routeIntent(text: string): Intent {
+  if (REPORT_QA_PATTERNS.some((pattern) => pattern.test(text))) {
+    return {
+      type: "report_qa",
+      question: text.trim()
+    };
+  }
+
   return {
     type: "quick_judge",
     rawSymbolQuery: extractSymbolQuery(text)

@@ -16,4 +16,11 @@ describe("routeIntent", () => {
       rawSymbolQuery: "00700.HK"
     });
   });
+
+  it("routes a report follow-up question to report_qa", () => {
+    expect(routeIntent("这份报告里最大的风险是什么")).toEqual({
+      type: "report_qa",
+      question: "这份报告里最大的风险是什么"
+    });
+  });
 });

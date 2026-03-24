@@ -11,6 +11,8 @@ export { FixtureMarketDataProvider } from "./market-data/fixture-market-data-pro
 export type { MarketDataProvider, MarketDataSnapshot, ValuationTemperature } from "./market-data/market-data-provider.js";
 export { quickJudge } from "./quick-judge/quick-judge-service.js";
 export type { QuickJudgeResult, QuickJudgeSymbol, QuickJudgeVerdict } from "./quick-judge/types.js";
+export { createReportQaService } from "./report-qa/report-qa-service.js";
+export type { ReportQaAnswer, ReportQaInput } from "./report-qa/report-qa-service.js";
 export { createReportStore } from "./reports/report-store.js";
 export type { StoredReport } from "./reports/report-store.js";
 export { ClaudeCliExecutor } from "./research/claude-cli-executor.js";
