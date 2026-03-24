@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "dev": "node --import tsx src/main.ts",
     "test": "vitest run",
     "check": "tsc -p tsconfig.json --noEmit"
   },

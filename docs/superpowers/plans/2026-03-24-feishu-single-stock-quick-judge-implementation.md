@@ -8,6 +8,8 @@
 
 **Tech Stack:** Node.js 22+, TypeScript, pnpm workspace, `@larksuiteoapi/node-sdk`, Vitest, `better-sqlite3`, `zod`, `tsx`
 
+> Implementation note: the current codebase uses `node:sqlite` `DatabaseSync` instead of `better-sqlite3`, because the local Node 25 environment did not provide a stable native-build path for `better-sqlite3`.
+
 ---
 
 ## File Structure

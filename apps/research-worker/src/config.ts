@@ -1,4 +1,4 @@
-import { join } from "node:path";
+import { isAbsolute, join } from "node:path";
 
 import { loadCoreConfig } from "@stock-bot/research-core";
 
@@ -11,20 +11,27 @@ export type ResearchWorkerConfig = {
   replayFixturesRoot: string;
 };
 
+function resolvePathFromRoot(inputPath: string, rootDir: string) {
+  return isAbsolute(inputPath) ? inputPath : join(rootDir, inputPath);
+}
+
 export function loadResearchWorkerConfig(
   env: Record<string, string | undefined>,
-  cwd = process.cwd()
+  rootDir = process.cwd()
 ): ResearchWorkerConfig {
   const coreConfig = loadCoreConfig(env);
   const executorMode = env.RESEARCH_EXECUTOR_MODE === "claude_cli" ? "claude_cli" : "replay";
   const pollIntervalMs = Number(env.WORKER_POLL_INTERVAL_MS ?? "5000");
 
   return {
-    sqlitePath: coreConfig.sqlitePath,
-    reportRoot: coreConfig.reportRoot,
+    sqlitePath: resolvePathFromRoot(coreConfig.sqlitePath, rootDir),
+    reportRoot: resolvePathFromRoot(coreConfig.reportRoot, rootDir),
     executorMode,
     claudeCliPath: env.CLAUDE_CLI_PATH ?? "claude",
     pollIntervalMs: Number.isFinite(pollIntervalMs) && pollIntervalMs > 0 ? pollIntervalMs : 5000,
-    replayFixturesRoot: env.REPLAY_FIXTURE_ROOT ?? join(cwd, "tests/fixtures/reports")
+    replayFixturesRoot: resolvePathFromRoot(
+      env.REPLAY_FIXTURE_ROOT ?? "tests/fixtures/reports",
+      rootDir
+    )
   };
 }
