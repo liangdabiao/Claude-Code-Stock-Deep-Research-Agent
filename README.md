@@ -28,12 +28,13 @@
 
 1. [Features](#features)
 2. [Repo Structure](#repo-structure)
-3. [Quick Start](#quick-start)
-4. [Stock Investment Research](#stock-investment-research)
-5. [How It Works](#how-it-works)
-6. [Customization](#customization)
-7. [Credits & Acknowledgements](#credits--acknowledgements)
-8. [License](#license)
+3. [Feishu Bot MVP](#feishu-bot-mvp)
+4. [Quick Start](#quick-start)
+5. [Stock Investment Research](#stock-investment-research)
+6. [How It Works](#how-it-works)
+7. [Customization](#customization)
+8. [Credits & Acknowledgements](#credits--acknowledgements)
+9. [License](#license)
 
 ---
 
@@ -83,6 +84,42 @@ A flexible **7-phase framework** for general research topics (business, technolo
 | **CLAUDE2.md** | Graph of Thoughts implementation details |
 | **PROJECT_UNDERSTANDING.md** | Architecture deep dive |
 | **IMPLEMENTATION_GUIDE.md** | User guide |
+| **apps/feishu-bot/** | 飞书机器人入口与卡片/消息处理 |
+| **apps/research-worker/** | SQLite 轮询 worker 与异步深研执行 |
+| **packages/research-core/** | 标的解析、快判、任务队列、报告存储、报告追问 |
+| **docs/feishu-bot-mvp-operations.md** | 飞书 Bot MVP 本地启动与运维说明 |
+
+---
+
+## Feishu Bot MVP
+
+Repository 现在包含一个聚焦的飞书单票助手工作区，MVP 只做三件事：
+
+- 单票快判
+- 一键创建完整深研任务
+- 围绕已完成报告追问
+
+当前实现目录：
+
+- `apps/feishu-bot`
+- `apps/research-worker`
+- `packages/research-core`
+
+本地启动：
+
+```bash
+pnpm install
+cp .env.example .env
+pnpm --filter @stock-bot/feishu-bot dev
+pnpm --filter @stock-bot/research-worker dev
+```
+
+运行说明：
+
+- 默认 `RESEARCH_EXECUTOR_MODE=replay`，适合本地 smoke test
+- `claude_cli` 目前只是执行器接缝，尚未接入真实 runner，先不要作为默认模式
+- SQLite 当前使用 `node:sqlite`，本地测试/运行会看到 ExperimentalWarning，这是已知现象
+- 更完整的启动、权限和排障说明见 `docs/feishu-bot-mvp-operations.md`
 
 ---
 

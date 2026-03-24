@@ -1,0 +1,15 @@
+{
+  "context": {
+    "open_chat_id": "oc_test_chat"
+  },
+  "action": {
+    "value": {
+      "action": "create_deep_research",
+      "symbol": {
+        "ticker": "00700.HK",
+        "companyName": "腾讯控股",
+        "market": "HK"
+      }
+    }
+  }
+}
