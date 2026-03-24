@@ -27,6 +27,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/research-core
 
+  apps/research-worker:
+    dependencies:
+      '@stock-bot/research-core':
+        specifier: workspace:*
+        version: link:../../packages/research-core
+
   packages/research-core:
     dependencies:
       zod:
